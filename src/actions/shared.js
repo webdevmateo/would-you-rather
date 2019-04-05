@@ -3,7 +3,7 @@ import { receiveUsers } from './users'
 import { receivePolls } from './polls'
 import { setAuthedUser } from './authedUser'
 
-const authedId = null
+const authedId = 'sarahedo'
 
 export function handleInitialData () {
   return (dispatch) => {
