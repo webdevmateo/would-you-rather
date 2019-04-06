@@ -12,3 +12,76 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.app {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  outline: 2px solid red;
+  padding: .5em;
+}
+
+.pollList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80%;
+  outline: 2px solid green;
+}
+
+.polls {
+  width: 100%;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.poll {
+  outline: 2px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
+}
+
+.author {
+  width: 100%;
+  font-size: 80%;
+  margin: 0;
+  padding: 1em 0 1em .5em;
+  border-bottom: 1px solid #DDDDDD;
+  background-color: #EEEEEE;
+}
+
+.image {
+  width: 15%;
+  padding: .5em;
+}
+
+.avatar {
+  max-width: 100%;
+  border-radius: 50%;
+}
+
+.question-detail {
+  display: flex;
+  flex-wrap: wrap;
+  width: 75%;
+  margin: .5em 0;
+  border-left: 1px solid gray;
+  padding-left: 10px;
+}
+
+.question {
+  width: 100%;
+  font-size: 80%;
+  font-weight: bold;
+}
+
+.options {
+  width: 100%;
+  font-size: 65%;
+  margin-bottom: 1em;
+}
+
+.viewPoll {
+  width: 90%;
+}
