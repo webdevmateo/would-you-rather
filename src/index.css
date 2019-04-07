@@ -13,6 +13,8 @@ code {
     monospace;
 }
 
+/*App Component*/
+
 .app {
   display: flex;
   flex-wrap: wrap;
@@ -21,7 +23,9 @@ code {
   padding: .5em;
 }
 
-.pollList {
+/*ListPolls Component*/
+
+.poll-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -29,11 +33,31 @@ code {
   outline: 2px solid green;
 }
 
+.filter-polls-selected {
+  width: 50%;
+  height: 3em;
+  background: #F1EFF0;
+  color: green;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.filter-polls-not-selected {
+  width: 50%;
+  height: 3em;
+  background: transparent;
+  color: #808080;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .polls {
   width: 100%;
   list-style-type: none;
   padding-left: 0;
 }
+
+/*Poll Component*/
 
 .poll {
   outline: 2px solid black;
@@ -84,4 +108,59 @@ code {
 
 .viewPoll {
   width: 90%;
+}
+
+/*AnswerPoll Component*/
+
+.answer-poll {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media screen and (min-width: 700px) {
+  .answer-poll {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .answer-poll {
+    width: 700px;
+    margin: 0 auto;
+  }
+}
+
+.detail-image {
+  width: 25%;
+}
+
+.detail-avatar {
+  height: 6em;
+  border-radius: 50%;
+}
+
+.detail-question-detail {
+  width: 70%;
+  margin: .5em 0;
+  border-left: 1px solid gray;
+  padding-left: 1em;
+}
+
+.radios {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.radio {
+  margin-right: 1em
+}
+
+.submit-poll {
+  width: 100%;
+  height: 25px;
+  background: #34987C;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 3.5px;
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class Poll extends Component {
-    toPollDetail = (e) => {
+    toPollDetail = (e, id) => {
       e.preventDefault();
 
       //todo: Redirect User to Poll Detail View
@@ -29,8 +29,8 @@ class Poll extends Component {
               ...{poll.optionOne.text}...
             </span>
             <button
-              className='viewPoll'
-              onClick={this.toPollDetail}
+              className='view-poll'
+              onClick={(e) => this.toPollDetail(e, poll.id)}
             >
               View Poll
             </button>
@@ -45,7 +45,6 @@ function mapStateToProps({ polls, users, authedUser }, { id }) {
   const author = users[poll.author].name
   const avatar = users[poll.author].avatarURL
   return {
-    authedUser,
     poll,
     author,
     avatar,

@@ -25,31 +25,36 @@ class ListPolls extends Component {
   render() {
     const { users, authedUser } = this.props
     let { pollIds } = this.props
-    let answers = []
-    if (users[authedUser]) {
-      answers = Object.keys(users[authedUser].answers)
-    }
-
-    this.state.showUnanswered
-    ? pollIds = pollIds.filter((id) => answers.includes(id))
-    : pollIds = pollIds.filter((id) => !answers.includes(id))
+    let answers
+    users[authedUser]
+    ? answers = Object.keys(users[authedUser].answers)
+    : answers = []
 
     return (
-      <div className='pollList'>
+      <div className='poll-list'>
         <button
-          className=''
+          className={this.state.showUnanswered
+            ? 'filter-polls-selected'
+            : 'filter-polls-not-selected'
+          }
           onClick={this.showUnanswered}
         >
           Unanswered Questions
         </button>
         <button
-          className=''
+          className={this.state.showUnanswered
+            ? 'filter-polls-not-selected'
+            : 'filter-polls-selected'
+          }
           onClick={this.showAnswered}
         >
           Answered Questions
         </button>
         <ul className='polls'>
-          {pollIds.map((id) =>
+          {(this.state.showUnanswered
+            ? pollIds.filter((id) => answers.includes(id))
+            : pollIds.filter((id) => !answers.includes(id)))
+            .map((id) =>
             <li
               key={id}
             >

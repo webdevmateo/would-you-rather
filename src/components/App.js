@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import ListPolls from './ListPolls'
+import AnswerPoll from './AnswerPoll'
 
 class App extends Component {
   componentDidMount() {
@@ -10,12 +11,26 @@ class App extends Component {
   }
 
   render() {
+    const { loading } = this.props
+
     return (
       <div className='app'>
-        <ListPolls />
+        {loading === true
+          ? null
+          : <AnswerPoll
+              match={{params: {id: 'vthrdm985a262al8qx3do'}}}
+            />
+        }
       </div>
     );
   }
 }
 
-export default connect()(App);
+function mapStateToProps({ authedUser }) {
+  return {
+    loading: authedUser === null
+  }
+}
+
+
+export default connect(mapStateToProps)(App);
