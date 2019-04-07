@@ -2,67 +2,84 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class AnswerPoll extends Component {
-    toPollResults = (e, id) => {
-      e.preventDefault()
-      //todo: Redirect to ShowResults component
-    }
+  state = {
+    option: 'one',
+  }
 
-    render() {
+  toPollResults = (id) => {
 
-      const { pollLength, userLength, poll, author,
-      avatar} = this.props
+    //todo: Redirect to ShowResults component
+  }
 
-      if (pollLength > 0 && userLength > 0) {
-        return (
-          <div className='answer-poll'>
-            <h4 className='author'>{author} asks:</h4>
-            <div className='detail-image'>
-              <img
-                className='detail-avatar'
-                src={avatar}
-                alt={`${author}`}
-              />
+  handleChange = (e) => {
+    this.setState({
+      option: e.target.value
+    })
+  }
+
+  handleSumbit = (e) => {
+    e.preventDefault()
+    const { dispatch, poll } = this.props
+    const option = this.state.option
+    let text
+    option === 'one'
+    ? text = poll.optionOne.text
+    : text = poll.optionTwo.text
+    console.log(text)
+  }
+
+  render() {
+
+    const { poll, author, avatar} = this.props
+    return (
+      <div className='answer-poll'>
+        <h4 className='author'>{author} asks:</h4>
+        <div className='detail-image'>
+          <img
+            className='detail-avatar'
+            src={avatar}
+            alt={`${author}`}
+          />
+        </div>
+        <div className='detail-question-detail'>
+          <h3>Would You Rather ...</h3>
+          <form
+            onSubmit={this.handleSumbit}
+          >
+            <div className='radios'>
+              <label>
+                <input
+                  className='radio'
+                  type='radio'
+                  checked={this.state.option === 'one'}
+                  onChange={this.handleChange}
+                  value='one'
+                  id='optionOne'
+                />
+                {poll.optionOne.text}
+              </label>
             </div>
-            <div className='detail-question-detail'>
-              <h3>Would You Rather ...</h3>
-              <div className='radios'>
-                <label>
-                  <input
-                    className='radio'
-                    type='radio'
-                    name='options'
-                    value={poll.optionOne.text}
-                    id='optionOne'
-                  />
-                  {poll.optionOne.text}
-                </label>
-              </div>
-              <div className='radios'>
-                <label>
-                  <input
-                    className='radio'
-                    type='radio'
-                    name='options'
-                    value={poll.optionTwo.text}
-                    id='optionTwo'
-                  />
-                  {poll.optionTwo.text}
-                </label>
-              </div>
-              <button
-                className='submit-poll'
-                onClick={(e) => this.toPollResults(e, poll.id)}
-              >
-                Submit
-              </button>
+            <div className='radios'>
+              <label>
+                <input
+                  className='radio'
+                  type='radio'
+                  checked={this.state.option === 'two'}
+                  onChange={this.handleChange}
+                  value='two'
+                  id='optionTwo'
+                />
+                {poll.optionTwo.text}
+              </label>
             </div>
-          </div>
-        )
-      }
-        return (
-          <div>...Loading</div>
-        )
-    }
+            <button className='submit-poll'>
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    )
+  }
 }
 
 function mapStateToProps({ polls, users, authedUser }, props) {
