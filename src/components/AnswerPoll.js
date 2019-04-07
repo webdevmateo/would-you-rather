@@ -26,6 +26,10 @@ class AnswerPoll extends Component {
     ? text = poll.optionOne.text
     : text = poll.optionTwo.text
     console.log(text)
+
+    //todo: Dispatch actions to store: add answer to user's list of answers and add user's id to answer's list of votes
+
+    //todo: Redirect to ShowResults component
   }
 
   render() {

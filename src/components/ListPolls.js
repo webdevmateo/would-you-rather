@@ -25,10 +25,7 @@ class ListPolls extends Component {
   render() {
     const { users, authedUser } = this.props
     let { pollIds } = this.props
-    let answers
-    users[authedUser]
-    ? answers = Object.keys(users[authedUser].answers)
-    : answers = []
+    const answers = Object.keys(users[authedUser].answers)
 
     return (
       <div className='poll-list'>

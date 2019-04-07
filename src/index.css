@@ -19,7 +19,6 @@ code {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  outline: 2px solid red;
   padding: .5em;
 }
 

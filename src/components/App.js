@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import ListPolls from './ListPolls'
 import AnswerPoll from './AnswerPoll'
+import LoadingBar from 'react-redux-loading';
+
 
 class App extends Component {
   componentDidMount() {
@@ -14,15 +16,19 @@ class App extends Component {
     const { loading } = this.props
 
     return (
-      <div className='app'>
-        {loading === true
-          ? null
-          : <AnswerPoll
-              match={{params: {id: 'vthrdm985a262al8qx3do'}}}
-            />
-        }
-      </div>
-    );
+
+      <Fragment>
+        <LoadingBar />
+        <div className='app'>
+          {loading === true
+            ? null
+            : <AnswerPoll
+                match={{params: {id: 'vthrdm985a262al8qx3do'}}}
+              />
+          }
+        </div>
+      </Fragment>
+    )
   }
 }
 
