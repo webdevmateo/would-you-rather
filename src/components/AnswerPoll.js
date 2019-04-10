@@ -8,11 +8,6 @@ class AnswerPoll extends Component {
     option: 'one',
   }
 
-  toPollResults = (id) => {
-
-    //todo: Redirect to ShowResults component
-  }
-
   handleChange = (e) => {
     this.setState({
       option: e.target.value
@@ -21,7 +16,7 @@ class AnswerPoll extends Component {
 
   handleSumbit = (e) => {
     e.preventDefault()
-    const { dispatch, poll, authedUser } = this.props
+    const { dispatch, poll } = this.props
     const { option } = this.state
     let answer
     option === 'one'
@@ -29,7 +24,6 @@ class AnswerPoll extends Component {
     : answer = 'optionTwo'
 
     dispatch(handleAddAnswer(poll.id, answer))
-    dispatch(addVote(authedUser, poll.id, answer))
 
     //todo: Redirect to ShowResults component
   }
@@ -98,7 +92,6 @@ function mapStateToProps({ polls, users, authedUser }, props) {
     poll,
     author,
     avatar,
-    authedUser,
   }
 }
 

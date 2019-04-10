@@ -6,6 +6,7 @@ class Poll extends Component {
       e.preventDefault();
 
       //todo: Redirect User to Poll Detail View
+      //if user has already answered the poll, redirect to ShowResults component; if not, then redirect to AnswerPoll component
     }
 
     render() {
