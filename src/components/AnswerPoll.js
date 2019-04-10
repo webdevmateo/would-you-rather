@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { handleAddAnswer } from '../actions/users'
+import { addVote } from '../actions/polls'
 
 class AnswerPoll extends Component {
   state = {
@@ -19,22 +21,22 @@ class AnswerPoll extends Component {
 
   handleSumbit = (e) => {
     e.preventDefault()
-    const { dispatch, poll } = this.props
-    const option = this.state.option
-    let text
+    const { dispatch, poll, authedUser } = this.props
+    const { option } = this.state
+    let answer
     option === 'one'
-    ? text = poll.optionOne.text
-    : text = poll.optionTwo.text
-    console.log(text)
+    ? answer = 'optionOne'
+    : answer = 'optionTwo'
 
-    //todo: Dispatch actions to store: add answer to user's list of answers and add user's id to answer's list of votes
+    dispatch(handleAddAnswer(poll.id, answer))
+    dispatch(addVote(authedUser, poll.id, answer))
 
     //todo: Redirect to ShowResults component
   }
 
   render() {
 
-    const { poll, author, avatar} = this.props
+    const { poll, author, avatar } = this.props
     return (
       <div className='answer-poll'>
         <h4 className='author'>{author} asks:</h4>
@@ -88,22 +90,15 @@ class AnswerPoll extends Component {
 
 function mapStateToProps({ polls, users, authedUser }, props) {
   const { id } = props.match.params
-  const pollLength = Object.keys(polls).length
-  const userLength = Object.keys(users).length
-  let poll, author, avatar
-  if (pollLength > 0 && userLength > 0) {
-      poll = polls[id]
-      author = users[poll.author].name
-      avatar = users[poll.author].avatarURL
-  }
-
+  const poll = polls[id]
+  const author = users[poll.author].name
+  const avatar = users[poll.author].avatarURL
 
   return {
-    pollLength,
-    userLength,
     poll,
     author,
-    avatar
+    avatar,
+    authedUser,
   }
 }
 

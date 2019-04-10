@@ -1,5 +1,5 @@
 export const RECEIVE_POLLS = 'RECEIVE_POLLS'
-export const ANSWER_POLL = 'ANSWER_POLL'
+export const ADD_VOTE = 'ADD_VOTE'
 
 export function receivePolls (polls) {
   return {
@@ -8,15 +8,11 @@ export function receivePolls (polls) {
   }
 }
 
-function answerPoll (poll) {
+export function addVote (uid, qid, answer) {
   return {
-    type: ANSWER_POLL,
-    poll
-  }
-}
-
-export function handleAnswerPoll () {
-  return (dispatch, getState) => {
-
+    type: ADD_VOTE,
+    uid,
+    qid,
+    answer,
   }
 }
