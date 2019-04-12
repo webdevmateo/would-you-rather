@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAddAnswer } from '../actions/users'
 
@@ -23,10 +23,11 @@ class AnswerPoll extends Component {
     ? answer = 'optionOne'
     : answer = 'optionTwo'
 
-    dispatch(handleAddAnswer(poll.id, answer))
-    this.setState({
+  dispatch(handleAddAnswer(poll.id, answer))
+    ? this.setState({
       submitted: true
     })
+    : alert('There was a problem submitting the form.')
   }
 
   render() {

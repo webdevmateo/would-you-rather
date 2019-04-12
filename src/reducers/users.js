@@ -1,4 +1,4 @@
-import { RECEIVE_USERS, ADD_ANSWER, REMOVE_ANSWER } from '../actions/users'
+import { RECEIVE_USERS, ADD_ANSWER, REMOVE_ANSWER, ADD_POLL_TO_USER } from '../actions/users'
 
 export default function users (state = {}, action) {
   switch(action.type) {
@@ -29,6 +29,14 @@ export default function users (state = {}, action) {
           }
           return acc;
           }, {})
+        }
+      }
+    case ADD_POLL_TO_USER :
+      return {
+        ...state,
+        [action.uid]: {
+          ...state[action.uid],
+          questions: state[action.uid].questions.concat([action.qid])
         }
       }
     default :
