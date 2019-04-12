@@ -111,20 +111,22 @@ code {
 
 /*AnswerPoll Component*/
 
-.answer-poll {
+.answer-poll, .show-results {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
+  border: 1px solid #EAEAEA;
 }
 
 @media screen and (min-width: 700px) {
-  .answer-poll {
+  .answer-poll, .show-results {
     width: 70%;
   }
 }
 
 @media screen and (min-width: 1000px) {
-  .answer-poll {
+  .answer-poll, .show-results {
     width: 700px;
     margin: 0 auto;
   }
@@ -132,6 +134,8 @@ code {
 
 .detail-image {
   width: 25%;
+  display: flex;
+  justify-content: center;
 }
 
 .detail-avatar {
@@ -140,10 +144,17 @@ code {
 }
 
 .detail-question-detail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   width: 70%;
   margin: .5em 0;
   border-left: 1px solid gray;
-  padding-left: 1em;
+  padding-left: .65em;
+}
+
+.question-form {
+  width: 100%;
 }
 
 .radios {
@@ -162,4 +173,42 @@ code {
   color: #fff;
   font-weight: bold;
   border-radius: 3.5px;
+}
+
+.header {
+  width: 100%;
+}
+
+.option {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border: 1px solid #CDE0DD;
+  padding-left: .5em;
+  margin-bottom: 1em;
+}
+
+.vote {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  z-index: 1000;
+  margin-right: 0;
+  margin-left: 70%;
+  background: #DDBA3F;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.option-text {
+  font-size: 95%;
+}
+
+.percentage {
+  /*todo*/
+}
+
+.votes {
+  font-weight: bold;
+  text-align: center;
 }

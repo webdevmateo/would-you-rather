@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { handleAddAnswer } from '../actions/users'
-import { addVote } from '../actions/polls'
 
 class AnswerPoll extends Component {
   state = {
     option: 'one',
+    submitted: false,
   }
 
   handleChange = (e) => {
@@ -16,7 +16,7 @@ class AnswerPoll extends Component {
 
   handleSumbit = (e) => {
     e.preventDefault()
-    const { dispatch, poll } = this.props
+    const { dispatch, poll} = this.props
     const { option } = this.state
     let answer
     option === 'one'
@@ -24,63 +24,109 @@ class AnswerPoll extends Component {
     : answer = 'optionTwo'
 
     dispatch(handleAddAnswer(poll.id, answer))
-
-    //todo: Redirect to ShowResults component
+    this.setState({
+      submitted: true
+    })
   }
 
   render() {
 
-    const { poll, author, avatar } = this.props
+    const { poll, author, avatar, authedUser } = this.props
+
     return (
-      <div className='answer-poll'>
-        <h4 className='author'>{author} asks:</h4>
-        <div className='detail-image'>
-          <img
-            className='detail-avatar'
-            src={avatar}
-            alt={`${author}`}
-          />
-        </div>
-        <div className='detail-question-detail'>
-          <h3>Would You Rather ...</h3>
-          <form
-            onSubmit={this.handleSumbit}
-          >
-            <div className='radios'>
-              <label>
-                <input
-                  className='radio'
-                  type='radio'
-                  checked={this.state.option === 'one'}
-                  onChange={this.handleChange}
-                  value='one'
-                  id='optionOne'
-                />
-                {poll.optionOne.text}
-              </label>
+      this.state.submitted === true
+      ? <div className='show-results'>
+          <h4 className='author'>Asked by {author}</h4>
+          <div className='detail-image'>
+            <img
+              className='detail-avatar'
+              src={avatar}
+              alt={`${author}`}
+            />
+          </div>
+          <div className='detail-question-detail'>
+            <h3 className='header'>Results:</h3>
+            <div className='option'>
+              {poll.optionOne.votes.includes(authedUser) &&
+              <div className='vote'>Your Vote</div>}
+              <h4
+                className='option-text'
+              >
+                Would you rather {poll.optionOne.text}?
+              </h4>
+              <div className='percentage'>
+                {`${(poll.optionOne.votes.length / (poll.optionOne.votes.length + poll.optionTwo.votes.length) * 100).toFixed(2)}%`}
+              </div>
+              <div className='votes'>
+              {poll.optionOne.votes.length > 0 && `${poll.optionOne.votes.length} out of ${poll.optionOne.votes.length + poll.optionTwo.votes.length} votes`}
+              </div>
             </div>
-            <div className='radios'>
-              <label>
-                <input
-                  className='radio'
-                  type='radio'
-                  checked={this.state.option === 'two'}
-                  onChange={this.handleChange}
-                  value='two'
-                  id='optionTwo'
-                />
-                {poll.optionTwo.text}
-              </label>
+            <div className='option'>
+            {poll.optionTwo.votes.includes(authedUser) && <div className='vote'>Your Vote</div>}
+              <h4
+                className='option-text'
+              >
+                Would you rather {poll.optionTwo.text}?
+              </h4>
+              <div className='percentage'>
+                {`${(poll.optionTwo.votes.length / (poll.optionOne.votes.length + poll.optionTwo.votes.length) * 100).toFixed(2)}%`}
+              </div>
+              <div className='votes'>
+              {poll.optionTwo.votes.length > 0 && `${poll.optionTwo.votes.length} out of ${poll.optionOne.votes.length + poll.optionTwo.votes.length} votes`}
+              </div>
             </div>
-            <button className='submit-poll'>
-              Submit
-            </button>
-          </form>
+          </div>
         </div>
-      </div>
-    )
+      : <div className='answer-poll'>
+          <h4 className='author'>{author} asks:</h4>
+          <div className='detail-image'>
+            <img
+              className='detail-avatar'
+              src={avatar}
+              alt={`${author}`}
+            />
+          </div>
+          <div className='detail-question-detail'>
+            <h3>Would You Rather ...</h3>
+            <form
+              className='question-form'
+              onSubmit={this.handleSumbit}
+            >
+              <div className='radios'>
+                <label>
+                  <input
+                    className='radio'
+                    type='radio'
+                    checked={this.state.option === 'one'}
+                    onChange={this.handleChange}
+                    value='one'
+                    id='optionOne'
+                  />
+                  {poll.optionOne.text}
+                </label>
+              </div>
+              <div className='radios'>
+                <label>
+                  <input
+                    className='radio'
+                    type='radio'
+                    checked={this.state.option === 'two'}
+                    onChange={this.handleChange}
+                    value='two'
+                    id='optionTwo'
+                  />
+                  {poll.optionTwo.text}
+                </label>
+              </div>
+              <button className='submit-poll'>
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      )
+    }
   }
-}
 
 function mapStateToProps({ polls, users, authedUser }, props) {
   const { id } = props.match.params
@@ -92,6 +138,7 @@ function mapStateToProps({ polls, users, authedUser }, props) {
     poll,
     author,
     avatar,
+    authedUser,
   }
 }
 
