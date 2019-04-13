@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { handleAddPoll } from '../actions/polls'
 
 
 class CreatePoll extends Component {
@@ -20,10 +21,17 @@ class CreatePoll extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state.optionOneText)
-    console.log(this.state.optionTwoText)
+    const { dispatch } = this.props
+    const { optionOneText } = this.state
+    const { optionTwoText } = this.state
 
-    //todo: Dispatch new poll to store and database
+    dispatch(handleAddPoll(optionOneText, optionTwoText))
+
+    this.setState({
+      optionOneText: '',
+      optionTwoText: '',
+    })
+
     //todo: Redirect user to home after submit
   }
 
@@ -46,7 +54,7 @@ class CreatePoll extends Component {
             value={this.state.optionOneText}
             onChange={this.handleChange}
           />
-          OR
+          <span className='space'>OR</span>
           <input
             id='two'
             type='text'
@@ -59,12 +67,6 @@ class CreatePoll extends Component {
         </form>
       </div>
     )
-  }
-}
-
-function mapStateToProps({}) {
-  return {
-
   }
 }
 

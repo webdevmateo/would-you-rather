@@ -253,8 +253,12 @@ code {
   padding-bottom: .5em;
 }
 
-.input {
+.input, .space {
   width: 95%;
+}
+
+.space {
+  text-align: center;
 }
 
 .submit-new-poll {
