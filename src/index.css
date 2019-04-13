@@ -116,7 +116,7 @@ code {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #ECECEC;
 }
 
 @media screen and (min-width: 700px) {
@@ -211,4 +211,58 @@ code {
 .votes {
   font-weight: bold;
   text-align: center;
+}
+
+/*CreatePoll component*/
+
+.create-poll {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  border: 1px solid #ECECEC;
+}
+
+.create {
+  padding-top: 1em;
+  margin: 0;
+}
+
+.divider {
+  width: 100%;
+  border: 1px solid #ECECEC;
+}
+
+.complete {
+  width: 100%;
+  padding-left: .5em;
+  font-size: 85%;
+  font-weight: bold;
+}
+
+.complete:first-of-type {
+  margin-bottom: .5em;
+}
+
+.enter-poll {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: .5em;
+}
+
+.input {
+  width: 95%;
+}
+
+.submit-new-poll {
+  width: 97%;
+  height: 25px;
+  margin-top: .5em;
+  background: #34987C;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 3.5px;
 }
