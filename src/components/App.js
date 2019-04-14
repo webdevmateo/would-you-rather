@@ -4,6 +4,7 @@ import { handleInitialData } from '../actions/shared'
 import ListPolls from './ListPolls'
 import AnswerPoll from './AnswerPoll'
 import CreatePoll from './CreatePoll'
+import ListUsers from './ListUsers'
 import LoadingBar from 'react-redux-loading';
 
 
@@ -23,7 +24,7 @@ class App extends Component {
         <div className='app'>
           {loading === true
             ? null
-            : <CreatePoll />
+            : <ListUsers />
 
               // <AnswerPoll
               //   match={{params: {id: 'vthrdm985a262al8qx3do'}}}

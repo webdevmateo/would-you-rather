@@ -270,3 +270,32 @@ code {
   font-weight: bold;
   border-radius: 3.5px;
 }
+
+/*ListUsers component*/
+
+.leader-board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  outline: 2px solid red;
+}
+
+.user-list {
+  width: 100%;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.user-list-item {
+  margin-bottom: 1em;
+}
+
+/*User component*/
+
+.user {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  outline: 1px solid green;
+}
