@@ -278,7 +278,6 @@ code {
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  outline: 2px solid red;
 }
 
 .user-list {
@@ -296,6 +295,66 @@ code {
 .user {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  outline: 1px solid green;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #DDDDDD;
+}
+
+.user-detail-image {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+}
+
+.user-avatar {
+  height: 5em;
+  border-radius: 50%;
+}
+
+.user-question-detail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 40%;
+  margin: .5em 0;
+  border-left: 1px solid #DDDDDD;
+  border-right: 1px solid #DDDDDD;
+  padding-left: .65em;
+  padding-right: 1em;
+}
+
+.user-name {
+  width: 100%;
+  margin: 0;
+}
+
+.answered-created {
+  width: 100%;
+}
+
+.answered-created:first-of-type {
+  margin-bottom: 0;
+}
+
+.right {
+  float: right;
+}
+
+.score {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-left: .5em;
+  margin-right: .5em;
+  width: 20%;
+  border: 1px solid #DDDDDD;
+}
+
+.score-header {
+  width: 100%;
+  text-align: center;
+  font-size: 80%;
+  margin: 0;
+  padding: 1em 0;
+  border-bottom: 1px solid #DDDDDD;
 }
