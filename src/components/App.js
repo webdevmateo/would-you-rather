@@ -5,6 +5,7 @@ import ListPolls from './ListPolls'
 import AnswerPoll from './AnswerPoll'
 import CreatePoll from './CreatePoll'
 import ListUsers from './ListUsers'
+import Login from './Login'
 import LoadingBar from 'react-redux-loading';
 
 
@@ -24,7 +25,7 @@ class App extends Component {
         <div className='app'>
           {loading === true
             ? null
-            : <ListUsers />
+            : <Login />
 
               // <AnswerPoll
               //   match={{params: {id: 'vthrdm985a262al8qx3do'}}}
@@ -36,9 +37,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ users }) {
+
   return {
-    loading: authedUser === null
+    loading: Object.keys(users).length === 0
   }
 }
 
