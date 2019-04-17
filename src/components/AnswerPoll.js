@@ -32,10 +32,12 @@ class AnswerPoll extends Component {
 
   render() {
 
-    const { poll, author, avatar, authedUser } = this.props
+    const { poll, author, avatar, authedUser, answers } = this.props
+
+    console.log(answers)
 
     return (
-      this.state.submitted === true
+      answers.includes(poll.id)
       ? <div className='show-results'>
           <h4 className='author'>Asked by {author}</h4>
           <div className='detail-image'>
@@ -130,16 +132,18 @@ class AnswerPoll extends Component {
   }
 
 function mapStateToProps({ polls, users, authedUser }, props) {
-  const { id } = props.match.params
-  const poll = polls[id]
+  const { question_id } = props.match.params
+  const poll = polls[question_id]
   const author = users[poll.author].name
   const avatar = users[poll.author].avatarURL
+  const answers = Object.keys(users[authedUser].answers)
 
   return {
     poll,
     author,
     avatar,
     authedUser,
+    answers,
   }
 }
 

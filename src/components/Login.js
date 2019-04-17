@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 
 class Login extends Component {
   state = {
     authedId: null,
+    redirectToReferrer: false,
   }
 
   handleChange = (e) => {
@@ -18,11 +20,19 @@ class Login extends Component {
     const { dispatch } = this.props
     const { authedId } = this.state
     dispatch(setAuthedUser(authedId))
-    //todo: redirect to '/'
+    this.setState({
+      redirectToReferrer: true,
+    })
   }
 
   render() {
+    const { from } = this.props.location.state || { from: { pathname: '/' } }
+    const { redirectToReferrer } = this.state
     const { usersArray } = this.props
+
+    if (redirectToReferrer === true) {
+      return <Redirect to={from} />
+    }
 
     return (
       <div className='show-results'>
@@ -33,8 +43,9 @@ class Login extends Component {
         >
           <select
             onChange={this.handleChange}
+            defaultValue='select'
           >
-            <option selected disabled>Select User</option>
+            <option value='select'>Select User</option>
             {usersArray.map((user) =>
               <option
                 key={user.id}
@@ -44,7 +55,9 @@ class Login extends Component {
               </option>
             )}
           </select>
-          <button>Login</button>
+          <button
+            disabled={this.state.authedId === null || this.state.authedId === 'select'}
+          >Login</button>
         </form>
       </div>
     )

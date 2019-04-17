@@ -1,13 +1,15 @@
 import React, { Component, Fragment } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
+import Nav from './Nav'
 import ListPolls from './ListPolls'
 import AnswerPoll from './AnswerPoll'
 import CreatePoll from './CreatePoll'
 import ListUsers from './ListUsers'
 import Login from './Login'
-import LoadingBar from 'react-redux-loading';
-
+import PrivateRoute from './PrivateRoute'
+import LoadingBar from 'react-redux-loading'
 
 class App extends Component {
   componentDidMount() {
@@ -16,31 +18,39 @@ class App extends Component {
   }
 
   render() {
-    const { loading } = this.props
+    const { loading, authedUser } = this.props
 
     return (
-
-      <Fragment>
-        <LoadingBar />
-        <div className='app'>
-          {loading === true
-            ? null
-            : <Login />
-
-              // <AnswerPoll
-              //   match={{params: {id: 'vthrdm985a262al8qx3do'}}}
-              // />
-          }
-        </div>
-      </Fragment>
+      <Router>
+        <Fragment>
+          <LoadingBar />
+          <div className='app'>
+            {loading === true
+              ? null
+              : <div className='container'>
+                  {authedUser === null
+                    ? null
+                    : <Nav />
+                  }
+                  <PrivateRoute authedUser={authedUser} path='/' exact component={ListPolls} />
+                  <PrivateRoute authedUser={authedUser} path='/questions/:question_id' component={AnswerPoll}/>
+                  <PrivateRoute authedUser={authedUser} path='/add' component={CreatePoll} />
+                  <PrivateRoute authedUser={authedUser} path='/leaderboard' component={ListUsers} />
+                  <Route path='/login' component={Login} />
+                </div>
+            }
+          </div>
+        </Fragment>
+      </Router>
     )
   }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authedUser }) {
 
   return {
-    loading: Object.keys(users).length === 0
+    loading: Object.keys(users).length === 0,
+    authedUser,
   }
 }
 

@@ -22,13 +22,17 @@ code {
   padding: .5em;
 }
 
+.container {
+  width: 100%;
+}
+
 /*ListPolls Component*/
 
 .poll-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 80%;
+  width: 100%;
   outline: 2px solid green;
 }
 
@@ -51,7 +55,7 @@ code {
 }
 
 .polls {
-  width: 100%;
+  min-width: 100%;
   list-style-type: none;
   padding-left: 0;
 }
