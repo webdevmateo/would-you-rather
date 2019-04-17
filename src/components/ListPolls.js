@@ -42,7 +42,7 @@ class ListPolls extends Component {
           }
           onClick={this.showUnanswered}
         >
-          Unanswered Questions
+          Unanswered Polls
         </button>
         <button
           className={this.state.showUnanswered
@@ -51,7 +51,7 @@ class ListPolls extends Component {
           }
           onClick={this.showAnswered}
         >
-          Answered Questions
+          Answered Polls
         </button>
         <ul className='polls'>
           <li>{filtered.length === 0

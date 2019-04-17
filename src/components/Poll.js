@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class Poll extends Component {
     toPollDetail = (e, id) => {
       e.preventDefault();
-      alert('working')
-      //todo: Redirect User to Poll Detail View
-      //if user has already answered the poll, redirect to ShowResults component; if not, then redirect to AnswerPoll component
+      this.props.history.push(`/questions/${id}`)
     }
 
     render() {
@@ -30,11 +28,14 @@ class Poll extends Component {
             <span className='options'>
               ...{poll.optionOne.text}...
             </span>
-            <Link to={`/questions/${poll.id}`}>
-              <button className='view-poll'>
+
+              <button
+                className='view-poll'
+                onClick={(e) => this.toPollDetail(e, poll.id)}
+              >
                 View Poll
               </button>
-            </Link>
+
           </div>
         </div>
       )
@@ -52,4 +53,4 @@ function mapStateToProps({ polls, users, authedUser }, { id }) {
   }
 }
 
-export default connect(mapStateToProps)(Poll)
+export default withRouter(connect(mapStateToProps)(Poll))

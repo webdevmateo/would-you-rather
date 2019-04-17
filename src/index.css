@@ -109,8 +109,14 @@ code {
   margin-bottom: 1em;
 }
 
-.viewPoll {
-  width: 90%;
+.view-poll {
+  width: 70%;
+  height: 25px;
+  margin-top: .5em;
+  background: #34987C;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 3.5px;
 }
 
 /*AnswerPoll Component*/

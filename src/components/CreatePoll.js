@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAddPoll } from '../actions/polls'
 
-
 class CreatePoll extends Component {
   state = {
     optionOneText: '',
@@ -32,7 +31,7 @@ class CreatePoll extends Component {
       optionTwoText: '',
     })
 
-    //todo: Redirect user to home after submit
+    this.props.history.push('/')
   }
 
   render() {
