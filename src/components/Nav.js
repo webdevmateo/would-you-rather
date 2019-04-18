@@ -1,26 +1,32 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import ShowAuthedUser from './ShowAuthedUser'
+import Logout from './Logout'
 
 export default function Nav () {
   return (
     <nav className='nav'>
-      <ul>
-        <li>
-          <NavLink to='/' exact>
+      <ul className='nav-list'>
+        <li className='nav-list-item'>
+          <NavLink className='nav-link' to='/' exact>
             Home
           </NavLink>
         </li>
-        <li>
-          <NavLink to='/add'>
+        <li className='nav-list-item'>
+          <NavLink className='nav-link' to='/add'>
             New Poll
           </NavLink>
         </li>
-        <li>
-          <NavLink to='/leaderboard'>
+        <li className='nav-list-item'>
+          <NavLink className='nav-link' to='/leaderboard'>
             Leader Board
-          </NavLink>  
+          </NavLink>
         </li>
       </ul>
+      <div className='authed-logout'>
+        <ShowAuthedUser />
+        <Logout />
+      </div>
     </nav>
   )
 }

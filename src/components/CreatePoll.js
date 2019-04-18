@@ -24,17 +24,26 @@ class CreatePoll extends Component {
     const { optionOneText } = this.state
     const { optionTwoText } = this.state
 
-    dispatch(handleAddPoll(optionOneText, optionTwoText))
+    if (optionOneText !== '' && optionTwoText !== '') {
+      dispatch(handleAddPoll(optionOneText, optionTwoText))
 
-    this.setState({
-      optionOneText: '',
-      optionTwoText: '',
-    })
+      this.setState({
+        optionOneText: '',
+        optionTwoText: '',
+      })
 
-    this.props.history.push('/')
+      this.props.history.push('/')
+    } else {
+      alert('Please fill in both options.')
+    }
+
   }
 
   render() {
+
+    const { optionOneText } = this.state
+    const { optionTwoText } = this.state
+
     return (
       <div className='create-poll'>
         <h3 className='create'>Create New Poll</h3>
@@ -50,7 +59,7 @@ class CreatePoll extends Component {
             type='text'
             className='input'
             placeholder='Enter option 1 text here.'
-            value={this.state.optionOneText}
+            value={optionOneText}
             onChange={this.handleChange}
           />
           <span className='space'>OR</span>
@@ -59,10 +68,14 @@ class CreatePoll extends Component {
             type='text'
             className='input'
             placeholder='Enter option 2 text here.'
-            value={this.state.optionTwoText}
+            value={optionTwoText}
             onChange={this.handleChange}
           />
-          <button className='submit-new-poll'>Submit</button>
+          <button
+            className='submit-new-poll'
+          >
+            Submit
+          </button>
         </form>
       </div>
     )

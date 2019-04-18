@@ -58,7 +58,7 @@ class AnswerPoll extends Component {
                 Would you rather {poll.optionOne.text}?
               </h4>
               <div className='percentage'>
-                {`${(poll.optionOne.votes.length / (poll.optionOne.votes.length + poll.optionTwo.votes.length) * 100).toFixed(2)}%`}
+                {`${(poll.optionOne.votes.length / (poll.optionOne.votes.length + poll.optionTwo.votes.length) * 100).toFixed(0)}%`}
               </div>
               <div className='votes'>
               {poll.optionOne.votes.length > 0 && `${poll.optionOne.votes.length} out of ${poll.optionOne.votes.length + poll.optionTwo.votes.length} votes`}
@@ -72,7 +72,7 @@ class AnswerPoll extends Component {
                 Would you rather {poll.optionTwo.text}?
               </h4>
               <div className='percentage'>
-                {`${(poll.optionTwo.votes.length / (poll.optionOne.votes.length + poll.optionTwo.votes.length) * 100).toFixed(2)}%`}
+                {`${(poll.optionTwo.votes.length / (poll.optionOne.votes.length + poll.optionTwo.votes.length) * 100).toFixed(0)}%`}
               </div>
               <div className='votes'>
               {poll.optionTwo.votes.length > 0 && `${poll.optionTwo.votes.length} out of ${poll.optionOne.votes.length + poll.optionTwo.votes.length} votes`}

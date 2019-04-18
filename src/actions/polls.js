@@ -1,5 +1,6 @@
 import { saveQuestion } from '../utils/api'
 import { addPollToUser } from './users'
+import { showLoading, hideLoading} from 'react-redux-loading';
 
 export const RECEIVE_POLLS = 'RECEIVE_POLLS'
 export const ADD_VOTE = 'ADD_VOTE'
@@ -43,6 +44,8 @@ export function handleAddPoll(optionOneText, optionTwoText) {
     const { authedUser } = getState()
     const author = authedUser
 
+    dispatch(showLoading());
+
     return saveQuestion({
       optionOneText,
       optionTwoText,
@@ -56,5 +59,6 @@ export function handleAddPoll(optionOneText, optionTwoText) {
       console.log('There was an error of type: ', e);
       alert('There was an error adding the poll.  Please try again');
     })
+    .then(dispatch(hideLoading()));
   }
 }
