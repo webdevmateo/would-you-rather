@@ -3,6 +3,8 @@ ___
 
 This an online version of the 'Would You Rather' game, wherein people are able to create and ask each other questions that are grouped in pairs.  For example, 'Would you rather visit Hawaii or Alaska?'
 
+The application was built using React and Redux, with React rendering all of the user interfaces, and Redux storing the data.  Users can choose among three avatars, and can ask, answer and view polls, as well as see a leaderboard that lists the avatar users in descending order based on the number of polls answered and created.
+
 # How to run this application locally
 ___
 
