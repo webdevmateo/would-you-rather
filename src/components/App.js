@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Nav from './Nav'
+import Unidentified from './Unidentified'
 import ListPolls from './ListPolls'
 import AnswerPoll from './AnswerPoll'
 import CreatePoll from './CreatePoll'
@@ -32,11 +33,14 @@ class App extends Component {
                     ? null
                     : <Nav />
                   }
-                  <PrivateRoute authedUser={authedUser} path='/' exact component={ListPolls} />
-                  <PrivateRoute authedUser={authedUser} path='/questions/:question_id' component={AnswerPoll}/>
-                  <PrivateRoute authedUser={authedUser} path='/add' component={CreatePoll} />
-                  <PrivateRoute authedUser={authedUser} path='/leaderboard' component={ListUsers} />
-                  <Route path='/login' component={Login} />
+                  <Switch>
+                    <PrivateRoute authedUser={authedUser} path='/' exact component={ListPolls} />
+                    <PrivateRoute authedUser={authedUser} path='/questions/:question_id' component={AnswerPoll}/>
+                    <PrivateRoute authedUser={authedUser} path='/add' component={CreatePoll} />
+                    <PrivateRoute authedUser={authedUser} path='/leaderboard' component={ListUsers} />
+                    <Route path='/login' component={Login} />
+                    <Route component={Unidentified} />
+                  </Switch>
                 </div>
             }
           </div>

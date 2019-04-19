@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 class ShowAuthedUser extends Component {
   render() {
     const { name, avatar } = this.props
-    console.log(name, avatar)
     return (
       <div className='authed-user'>
         <span className='greeting'>Hello, {name}</span>

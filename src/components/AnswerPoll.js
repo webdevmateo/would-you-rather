@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PollNotFound from './PollNotFound'
 import { handleAddAnswer } from '../actions/users'
 
 class AnswerPoll extends Component {
@@ -34,7 +35,9 @@ class AnswerPoll extends Component {
 
     const { poll, author, avatar, authedUser, answers } = this.props
 
-    console.log(answers)
+    if (poll === null) {
+      return <PollNotFound />
+    }
 
     return (
       answers.includes(poll.id)
@@ -133,9 +136,17 @@ class AnswerPoll extends Component {
 
 function mapStateToProps({ polls, users, authedUser }, props) {
   const { question_id } = props.match.params
-  const poll = polls[question_id]
-  const author = users[poll.author].name
-  const avatar = users[poll.author].avatarURL
+  let poll, author, avatar
+  polls[question_id]
+  ? poll = polls[question_id]
+  : poll = null
+  poll !== null
+  ? author = users[poll.author].name
+  : author = null
+  author
+  ? avatar = users[poll.author].avatarURL
+  : avatar = null
+
   const answers = Object.keys(users[authedUser].answers)
 
   return {
