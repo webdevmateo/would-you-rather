@@ -25,10 +25,10 @@ ___
 
 This project was created using the following dependencies:
 * [Create React App](https://github.com/facebook/create-react-app)
+* [Redux](https://redux.js.org/)
 * [React Redux](https://react-redux.js.org/)
 * [react-redux-loading](https://www.npmjs.com/package/react-redux-loading)
 * [react-router-dom](https://www.npmjs.com/package/react-router-dom)
-* [Redux](https://redux.js.org/)
 * [redux-thunk](https://github.com/reduxjs/redux-thunk)
 
 
