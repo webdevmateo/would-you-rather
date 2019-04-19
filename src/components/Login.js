@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
+import Image from '../question-mark.jpeg'
 
 class Login extends Component {
   state = {
@@ -19,10 +20,15 @@ class Login extends Component {
     e.preventDefault()
     const { dispatch } = this.props
     const { authedId } = this.state
-    dispatch(setAuthedUser(authedId))
-    this.setState({
-      redirectToReferrer: true,
-    })
+
+    if (authedId === null || authedId === 'select') {
+      alert('Please select a user.')
+    } else {
+      dispatch(setAuthedUser(authedId))
+      this.setState({
+        redirectToReferrer: true,
+      })
+    }
   }
 
   render() {
@@ -35,13 +41,22 @@ class Login extends Component {
     }
 
     return (
-      <div className='show-results'>
+      <div className='login-container'>
         <h4 className='welcome'>Welcome to the Would You Rather App!</h4>
-
+        <p className='login-message'>Please log in to continue.</p>
+        <div>
+          <img
+            className='logo'
+            src={Image}
+            alt='question mark logos'
+          />
+        </div>
         <form
+          className='login-form'
           onSubmit={this.handleSubmit}
         >
           <select
+            className='dropdown'
             onChange={this.handleChange}
             defaultValue='select'
           >
@@ -55,9 +70,7 @@ class Login extends Component {
               </option>
             )}
           </select>
-          <button
-            disabled={this.state.authedId === null || this.state.authedId === 'select'}
-          >Login</button>
+          <button className='login-button'>Login</button>
         </form>
       </div>
     )
