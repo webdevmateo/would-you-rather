@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeAuthedUser } from '../actions/authedUser'
 
@@ -8,6 +9,7 @@ class Logout extends Component {
     e.preventDefault()
     const { dispatch } = this.props
     dispatch(removeAuthedUser())
+    this.props.history.push('/login')
   }
 
   render () {
@@ -24,4 +26,4 @@ class Logout extends Component {
   }
 }
 
-export default connect()(Logout)
+export default withRouter(connect()(Logout))

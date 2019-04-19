@@ -15,7 +15,8 @@ In order to run this application on your local computer, do the following:
 3. Then, you can either clone the repository or download a .zip file to your local computer.
 4. When you have local access, do the following:
      - Launch a command line tool, such as Terminal.
-     - Navigate to the project's root directory, and run the following command:
+     - Navigate to the project's root directory, and run the following commands:
+          * `npm install`
           * `npm start`
      - Visit the site in your browser at `http://localhost:3000`.
 
