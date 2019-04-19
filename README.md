@@ -5,6 +5,8 @@ This an online version of the 'Would You Rather' game, wherein people are able t
 
 The application was built using React and Redux, with React rendering all of the user interfaces, and Redux storing the data.  Users can choose among three avatars, and can ask, answer and view polls, as well as see a leaderboard that lists the avatar users in descending order based on the number of polls answered and created.
 
+This was the second of three projects in the [Udacity React Nanodegree Program](https://www.udacity.com/course/react-nanodegree--nd019).
+
 # How to run this application locally
 ___
 
