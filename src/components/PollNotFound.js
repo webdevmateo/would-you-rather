@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function PollNotFound () {
   return (
-    <div>
+    <p>
       The poll you are looking for doesn't exist.
-    </div>
+    </p>
   )
 }

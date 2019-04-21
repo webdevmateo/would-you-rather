@@ -36,7 +36,12 @@ class Login extends Component {
     const { redirectToReferrer } = this.state
     const { usersArray } = this.props
     if (redirectToReferrer === true) {
-      return <Redirect to={from} />
+      return <Redirect to={{
+        pathname: from.pathname ? from.pathname : '/404',
+        state: {
+          from: '/login'
+        }
+      }} />
     }
 
     return (
