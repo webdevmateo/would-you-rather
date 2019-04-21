@@ -13,14 +13,14 @@ import PrivateRoute from './PrivateRoute'
 import LoadingBar from 'react-redux-loading'
 
 class App extends Component {
+
   componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(handleInitialData())
+    const { handleInitialData } = this.props
+    handleInitialData()
   }
 
   render() {
     const { loading, authedUser } = this.props
-
     return (
       <Router>
         <Fragment>
@@ -59,4 +59,4 @@ function mapStateToProps({ users, authedUser }) {
 }
 
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { handleInitialData })(App);

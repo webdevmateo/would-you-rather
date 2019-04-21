@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PollNotFound from './PollNotFound'
-import { handleAddAnswer } from '../actions/users'
+import { handleAddAnswer } from '../actions/shared'
 
 class AnswerPoll extends Component {
   state = {
@@ -17,14 +17,14 @@ class AnswerPoll extends Component {
 
   handleSumbit = (e) => {
     e.preventDefault()
-    const { dispatch, poll} = this.props
+    const { handleAddAnswer, poll} = this.props
     const { option } = this.state
     let answer
     option === 'one'
     ? answer = 'optionOne'
     : answer = 'optionTwo'
 
-  dispatch(handleAddAnswer(poll.id, answer))
+  handleAddAnswer(poll.id, answer)
     ? this.setState({
       submitted: true
     })
@@ -33,57 +33,15 @@ class AnswerPoll extends Component {
 
   render() {
 
-    const { poll, author, avatar, authedUser, answers } = this.props
-
-    if (poll === null) {
+    const { pollExists, poll, author, avatar, authedUser, answers } = this.props
+    
+    if (!pollExists) {
       return <PollNotFound />
     }
 
     return (
-      answers.includes(poll.id)
-      ? <div className='show-results'>
-          <h4 className='author'>Asked by {author}</h4>
-          <div className='detail-image'>
-            <img
-              className='detail-avatar'
-              src={avatar}
-              alt={`${author}`}
-            />
-          </div>
-          <div className='detail-question-detail'>
-            <h3 className='header'>Results:</h3>
-            <div className='option'>
-              {poll.optionOne.votes.includes(authedUser) &&
-              <div className='vote'>Your Vote</div>}
-              <h4
-                className='option-text'
-              >
-                Would you rather {poll.optionOne.text}?
-              </h4>
-              <div className='percentage'>
-                {`${(poll.optionOne.votes.length / (poll.optionOne.votes.length + poll.optionTwo.votes.length) * 100).toFixed(0)}%`}
-              </div>
-              <div className='votes'>
-              {poll.optionOne.votes.length > 0 && `${poll.optionOne.votes.length} out of ${poll.optionOne.votes.length + poll.optionTwo.votes.length} votes`}
-              </div>
-            </div>
-            <div className='option'>
-            {poll.optionTwo.votes.includes(authedUser) && <div className='vote'>Your Vote</div>}
-              <h4
-                className='option-text'
-              >
-                Would you rather {poll.optionTwo.text}?
-              </h4>
-              <div className='percentage'>
-                {`${(poll.optionTwo.votes.length / (poll.optionOne.votes.length + poll.optionTwo.votes.length) * 100).toFixed(0)}%`}
-              </div>
-              <div className='votes'>
-              {poll.optionTwo.votes.length > 0 && `${poll.optionTwo.votes.length} out of ${poll.optionOne.votes.length + poll.optionTwo.votes.length} votes`}
-              </div>
-            </div>
-          </div>
-        </div>
-      : <div className='answer-poll'>
+      !answers.includes(poll.id)
+      ? <div className='answer-poll'>
           <h4 className='author'>{author} asks:</h4>
           <div className='detail-image'>
             <img
@@ -130,26 +88,63 @@ class AnswerPoll extends Component {
             </form>
           </div>
         </div>
+      : <div className='show-results'>
+          <h4 className='author'>Asked by {author}</h4>
+          <div className='detail-image'>
+            <img
+              className='detail-avatar'
+              src={avatar}
+              alt={`${author}`}
+            />
+          </div>
+          <div className='detail-question-detail'>
+            <h3 className='header'>Results:</h3>
+            <div className='option'>
+              {poll.optionOne.votes.includes(authedUser) &&
+              <div className='vote'>Your Vote</div>}
+              <h4
+                className='option-text'
+              >
+                Would you rather {poll.optionOne.text}?
+              </h4>
+              <div className='percentage'>
+                {`${(poll.optionOne.votes.length / (poll.optionOne.votes.length + poll.optionTwo.votes.length) * 100).toFixed(0)}%`}
+              </div>
+              <div className='votes'>
+              {poll.optionOne.votes.length > 0 && `${poll.optionOne.votes.length} out of ${poll.optionOne.votes.length + poll.optionTwo.votes.length} votes`}
+              </div>
+            </div>
+            <div className='option'>
+            {poll.optionTwo.votes.includes(authedUser) && <div className='vote'>Your Vote</div>}
+              <h4
+                className='option-text'
+              >
+                Would you rather {poll.optionTwo.text}?
+              </h4>
+              <div className='percentage'>
+                {`${(poll.optionTwo.votes.length / (poll.optionOne.votes.length + poll.optionTwo.votes.length) * 100).toFixed(0)}%`}
+              </div>
+              <div className='votes'>
+              {poll.optionTwo.votes.length > 0 && `${poll.optionTwo.votes.length} out of ${poll.optionOne.votes.length + poll.optionTwo.votes.length} votes`}
+              </div>
+            </div>
+          </div>
+        </div>
       )
     }
   }
 
 function mapStateToProps({ polls, users, authedUser }, props) {
   const { question_id } = props.match.params
-  let poll, author, avatar
-  polls[question_id]
-  ? poll = polls[question_id]
-  : poll = null
-  poll !== null
-  ? author = users[poll.author].name
-  : author = null
-  author
-  ? avatar = users[poll.author].avatarURL
-  : avatar = null
-
+  const pollIds = Object.keys(polls)
+  const pollExists = pollIds.includes(question_id)
+  const poll = pollExists ? polls[question_id] : null
+  const author = pollExists ? users[poll.author].name : null
+  const avatar = pollExists ? users[poll.author].avatarURL : null
   const answers = Object.keys(users[authedUser].answers)
 
   return {
+    pollExists,
     poll,
     author,
     avatar,
@@ -158,4 +153,4 @@ function mapStateToProps({ polls, users, authedUser }, props) {
   }
 }
 
-export default connect(mapStateToProps)(AnswerPoll);
+export default connect(mapStateToProps, { handleAddAnswer })(AnswerPoll);

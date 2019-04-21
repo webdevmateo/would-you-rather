@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { handleAddPoll } from '../actions/polls'
+import { handleAddPoll } from '../actions/shared'
 
 class CreatePoll extends Component {
   state = {

@@ -7,9 +7,3 @@ export function setAuthedUser (id) {
     id
   }
 }
-
-export function removeAuthedUser () {
-  return {
-    type: REMOVE_AUTHED_USER,
-  }
-}

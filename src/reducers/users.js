@@ -23,12 +23,13 @@ export default function users (state = {}, action) {
         ...state,
         [action.uid]: {
           ...state[action.uid],
-          answers:           Object.keys(state[action.uid].answers).reduce((acc, key) => {
-          if (key !== action.qid) {
-            return {...acc, [key]: state[action.uid].answers[key]}
-          }
-          return acc;
-          }, {})
+          answers:           Object.keys(state[action.uid].answers).reduce((acc, key) => (
+            key !== action.qid
+            ? {
+              ...acc, [key]: state[action.uid].answers[key]
+            }
+            : acc
+          ), {})
         }
       }
     case ADD_POLL_TO_USER :

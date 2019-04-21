@@ -8,7 +8,6 @@ class Login extends Component {
   state = {
     authedId: null,
     redirectToReferrer: false,
-    pollExists: true,
   }
 
   handleChange = (e) => {
@@ -34,8 +33,6 @@ class Login extends Component {
 
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } }
-
-    console.log(from)
     const { redirectToReferrer } = this.state
     const { usersArray } = this.props
     if (redirectToReferrer === true) {

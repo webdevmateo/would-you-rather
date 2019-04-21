@@ -1,7 +1,3 @@
-import { saveQuestion } from '../utils/api'
-import { addPollToUser } from './users'
-import { showLoading, hideLoading} from 'react-redux-loading';
-
 export const RECEIVE_POLLS = 'RECEIVE_POLLS'
 export const ADD_VOTE = 'ADD_VOTE'
 export const REMOVE_VOTE = 'REMOVE_VOTE'
@@ -32,33 +28,9 @@ export function removeVote (uid, qid, answer) {
   }
 }
 
-function addPoll (poll) {
+export function addPoll (poll) {
   return {
     type: ADD_POLL,
     poll,
-  }
-}
-
-export function handleAddPoll(optionOneText, optionTwoText) {
-  return (dispatch, getState) => {
-    const { authedUser } = getState()
-    const author = authedUser
-
-    dispatch(showLoading());
-
-    return saveQuestion({
-      optionOneText,
-      optionTwoText,
-      author
-    })
-    .then((formattedPoll) => {
-      dispatch(addPoll(formattedPoll))
-      dispatch(addPollToUser(author, formattedPoll.id))
-    })
-    .catch((e) => {
-      console.log('There was an error of type: ', e);
-      alert('There was an error adding the poll.  Please try again');
-    })
-    .then(dispatch(hideLoading()));
   }
 }

@@ -29,17 +29,12 @@ function mapStateToProps({ users }) {
 
   const entries = Object.entries(users)
 
-  let temp = entries.map((entry) => {
+  let temp = entries.map((entry) => ({
+     id: entry[0],
+     sum: (Object.keys(entry[1].answers).length) + (entry[1].questions.length)
+    }))
   
-    return {
-      id: entry[0],
-      sum: (Object.keys(entry[1].answers).length) + (entry[1].questions.length)
-    }
-  })
-
-  const sorted = temp.sort((a,b) => {
-    return b.sum - a.sum
-  })
+  const sorted = temp.sort((a,b) => b.sum - a.sum)
 
   const ids = sorted.map((user) => user.id)
 
