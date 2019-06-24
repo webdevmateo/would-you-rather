@@ -22,7 +22,7 @@ class App extends Component {
   render() {
     const { loading, authedUser } = this.props
     return (
-      <Router>
+      <Router basename="/projects/wouldYouRather">
         <Fragment>
           <LoadingBar />
           <div className='app'>
