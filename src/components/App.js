@@ -34,11 +34,11 @@ class App extends Component {
                     : <Nav />
                   }
                   <Switch>
-                    <PrivateRoute authedUser={authedUser} path='/' exact component={ListPolls} />
-                    <PrivateRoute authedUser={authedUser} path='/questions/:question_id' component={AnswerPoll}/>
-                    <PrivateRoute authedUser={authedUser} path='/add' component={CreatePoll} />
-                    <PrivateRoute authedUser={authedUser} path='/leaderboard' component={ListUsers} />
-                    <Route path='/login' component={Login} />
+                    <PrivateRoute className='private' authedUser={authedUser} path='/' exact component={ListPolls} />
+                    <PrivateRoute className='private' authedUser={authedUser} path='/questions/:question_id' component={AnswerPoll}/>
+                    <PrivateRoute className='private' authedUser={authedUser} path='/add' component={CreatePoll} />
+                    <PrivateRoute className='private' authedUser={authedUser} path='/leaderboard' component={ListUsers} />
+                    <Route className='private' path='/login' component={Login} />
                     <Route component={Unidentified} />
                   </Switch>
                 </div>

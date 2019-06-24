@@ -20,6 +20,11 @@ code {
   flex-wrap: wrap;
   justify-content: center;
   padding: .5em;
+  width: 100%;
+}
+
+.private {
+  width: 100%;
 }
 
 .container {
@@ -27,6 +32,8 @@ code {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 /*ListPolls Component*/
@@ -553,6 +560,7 @@ code {
   border-bottom: 5px solid #43CDA4;
   margin-bottom: 1em;
   color: #696969;
+  outline: 1px solid red;
 }
 
 .nav-list {
