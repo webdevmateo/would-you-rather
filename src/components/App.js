@@ -21,6 +21,7 @@ class App extends Component {
 
   render() {
     const { loading, authedUser } = this.props
+
     return (
       <Router basename="/projects/wouldYouRather">
         <Fragment>
