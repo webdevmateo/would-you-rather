@@ -13,26 +13,63 @@ import PrivateRoute from './PrivateRoute'
 import LoadingBar from 'react-redux-loading'
 
 class App extends Component {
+  state = {
+    navLoaded: false,
+    navClass: 'drawer',
+  }
 
   componentDidMount() {
     const { handleInitialData } = this.props
     handleInitialData()
   }
 
+  displayNavLoaded = () => {
+    this.setState({
+      navLoaded: true,
+    })
+  }
+
+  toggleDrawer = () => {
+    const { navClass } = this.state
+
+    this.setState({
+      navClass: navClass === 'drawer' ? 'drawer open' : 'drawer',
+    })
+  }
+
+  closeDrawer = () => {
+    const { navLoaded, navClass } = this.state
+
+    if (navLoaded && navClass === 'drawer open') {
+      this.setState({
+        navClass: 'drawer',
+      })
+    }
+  }
+
   render() {
     const { loading, authedUser } = this.props
+    const { navClass, navLoaded } = this.state
 
     return (
       <Router basename="/projects/wouldYouRather">
         <Fragment>
           <LoadingBar />
-          <div className='app'>
+          <div
+            className='app'
+            onClick={this.closeDrawer}
+          >
             {loading === true
               ? null
               : <div className='container'>
                   {authedUser === null
                     ? null
-                    : <Nav />
+                    : <Nav
+                        navClass={navClass}
+                        toggleDrawer={this.toggleDrawer}
+                        navLoaded={navLoaded}
+                        displayNavLoaded={this.displayNavLoaded}
+                      />
                   }
                   <Switch>
                     <PrivateRoute className='private' authedUser={authedUser} path='/' exact component={ListPolls} />

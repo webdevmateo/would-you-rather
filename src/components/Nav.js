@@ -6,19 +6,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 class Nav extends Component {
-  state = {
-    drawer: true,
+
+  componentDidMount() {
+    const { displayNavLoaded } = this.props
+
+    displayNavLoaded()
   }
 
   toggleDrawer = () => {
-    const { drawer } = this.state
-    this.setState({
-      drawer: !drawer,
-    })
+    const { toggleDrawer } = this.props
+
+    toggleDrawer()
   }
 
   render() {
-    const { drawer } = this.state
+    const { navClass } = this.props
 
     return (
       <div className='navContainer'>
@@ -28,7 +30,7 @@ class Nav extends Component {
           className='bars'
           onClick={this.toggleDrawer}
         />
-        <nav className={drawer === true ? 'drawer' : 'open'}>
+        <nav className={navClass}>
           <NavList />
           <div className='authed-logout'>
             <ShowAuthedUser />
