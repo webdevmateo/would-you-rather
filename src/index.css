@@ -655,7 +655,7 @@ code {
   height: 100%;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 601px) {
   .bars {
     display: none;
   }
@@ -712,7 +712,7 @@ code {
   }
 
   .active {
-    color: red;
+    color: #000;
     font-weight: normal;
   }
 }
@@ -723,9 +723,32 @@ code {
   margin-left: auto;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (max-width: 600px) {
   .authed-logout {
-    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin-left: 0;
+    justify-content: center;
+    padding-bottom: 1em;
+    border-top: 1px solid #696969;
+  }
+
+  .logout-button {
+    background-color: #34987C;
+    padding-left: .5em;
+  }
+
+  .logout-button:hover {
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .authed-user {
+    width: 100%;
+    padding-left: .5em;
+  }
+
+  .logout {
+    width: 100%;
   }
 }
 
@@ -766,7 +789,8 @@ code {
   color: inherit;
 }
 
-.logout-button:hover {
-  color: #fff;
-  background: #43CDA4;
+@media screen and (min-width: 601px) {
+  .logout-button:hover {
+    background-color: #43CDA4;
+  }
 }
