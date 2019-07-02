@@ -94,6 +94,7 @@ code {
 .poll {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
   margin-bottom: 1em;
   border: 1px solid #ECECEC;
 }
@@ -108,11 +109,15 @@ code {
 }
 
 .image {
-  width: 15%;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: .5em;
 }
 
 .avatar {
+  height: 5em;
   max-width: 100%;
   border-radius: 50%;
 }
@@ -203,6 +208,8 @@ code {
 
 @media screen and (min-width: 450px) {
   .detail-image {
+    display: flex;
+    justify-content: center;
     width: 20%;
     padding-right: 1em;
   }
@@ -251,37 +258,50 @@ code {
 }
 
 .option {
+  display: flex;
+  flex-wrap: wrap;
   position: relative;
   z-index: 1;
   width: 100%;
   border: 1px solid #CDE0DD;
-  padding-left: .5em;
+  padding: 0 1em 1em 1em;
+  margin-right: 1em;
   margin-bottom: 1em;
 }
 
 .vote {
   width: 50px;
   height: 50px;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: -15px;
+  right: -20px;
   z-index: 1000;
-  margin-right: 0;
-  margin-left: 70%;
+  margin-left: 1em;
+  align-items: center;
   background: #DDBA3F;
   color: #fff;
   border-radius: 50%;
 }
 
+.voteText {
+  text-align: center;
+}
+
 .option-text {
+  position: relative;
+  z-index: 1;
   font-size: 95%;
 }
 
 .percentage {
-  /*todo*/
+  width: 100%;
+  margin-bottom: 1em;
 }
 
 .votes {
   font-weight: bold;
-  text-align: center;
 }
 
 /*CreatePoll component*/
@@ -470,27 +490,28 @@ code {
 .user {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   border: 1px solid #DDDDDD;
 }
 
 @media screen and (min-width: 401px) {
   .user-detail-image {
-    width: 25%;
+    width: 20%;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 
   .user-question-detail {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    width: 40%;
+    width: 45%;
     margin: .5em 0;
     border-left: 1px solid #DDDDDD;
     border-right: 1px solid #DDDDDD;
-    padding-left: .65em;
+    padding-left: 1em;
     padding-right: 1em;
   }
 
@@ -498,7 +519,7 @@ code {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-left: .5em;
+    margin-left: 1em;
     margin-right: .5em;
     width: 20%;
     border: 1px solid #DDDDDD;
@@ -635,6 +656,7 @@ code {
   position: absolute;
   -webkit-transform: translate(-350px, 0);
   transform: translate(-350px, 0);
+  z-index: 1000;
 }
 
 .open {

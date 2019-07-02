@@ -34,7 +34,7 @@ class AnswerPoll extends Component {
   render() {
 
     const { pollExists, poll, author, avatar, authedUser, answers } = this.props
-    
+
     if (!pollExists) {
       return <PollNotFound />
     }
@@ -100,13 +100,13 @@ class AnswerPoll extends Component {
           <div className='detail-question-detail'>
             <h3 className='header'>Results:</h3>
             <div className='option'>
+            <h4
+              className='option-text'
+            >
+              Would you rather {poll.optionOne.text}?
+            </h4>
               {poll.optionOne.votes.includes(authedUser) &&
-              <div className='vote'>Your Vote</div>}
-              <h4
-                className='option-text'
-              >
-                Would you rather {poll.optionOne.text}?
-              </h4>
+              <div className='vote'><span className='voteText'>Your Vote</span></div>}
               <div className='percentage'>
                 {`${(poll.optionOne.votes.length / (poll.optionOne.votes.length + poll.optionTwo.votes.length) * 100).toFixed(0)}%`}
               </div>
@@ -115,12 +115,12 @@ class AnswerPoll extends Component {
               </div>
             </div>
             <div className='option'>
-            {poll.optionTwo.votes.includes(authedUser) && <div className='vote'>Your Vote</div>}
-              <h4
-                className='option-text'
-              >
-                Would you rather {poll.optionTwo.text}?
-              </h4>
+            <h4
+              className='option-text'
+            >
+              Would you rather {poll.optionTwo.text}?
+            </h4>
+            {poll.optionTwo.votes.includes(authedUser) && <div className='vote'><span className='voteText'>Your Vote</span></div>}
               <div className='percentage'>
                 {`${(poll.optionTwo.votes.length / (poll.optionOne.votes.length + poll.optionTwo.votes.length) * 100).toFixed(0)}%`}
               </div>
