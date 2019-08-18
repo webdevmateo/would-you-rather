@@ -5172,7 +5172,7 @@ last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/last-call-webpack-plugin/-/last-call-webpack-plugin-3.0.0.tgz#9742df0e10e3cf46e5c0381c2de90d3a7a2d7555"
   dependencies:
-    lodash "^4.17.5"
+    lodash "^4.17.13"
     webpack-sources "^1.1.0"
 
 lazy-cache@^0.2.3:
